@@ -26,9 +26,10 @@ We use a fixed research ledger structure:
 
 - H001: Self-supervised learning can learn cross-domain shared process representations.
 - H002: Process-aware tokenization can outperform fixed sampling patches for shared representation learning.
-- H002c: Alignment to a physical process coordinate can improve cross-domain representation quality.
-- H002d: The best process coordinate may depend on sensing modality.
-- H002e: Ordered physical process composition can add value beyond segmentation alone.
+- H002c_1: a physical process coordinate can be reliably recovered from real process signals.
+- H002c_2: tokenizing on that coordinate improves shared-representation learning.
+- H002d: the best process coordinate may depend on sensing modality.
+- H002e: ordered physical process composition can add value beyond segmentation alone.
 
 ## Current execution plan
 
@@ -40,23 +41,38 @@ We use a fixed research ledger structure:
 
 ## Current evidence status
 
-### Completed
+### H001 — shared representation
 
-- Synthetic process-coordinate audit sanity checks passed. This validates code behavior only, not the scientific hypothesis.
-- PHM2010 public/derived data confirm a meaningful cross-cutter domain-shift problem.
-- E000-B feature-level lower baseline completed on 945 cuts using strict leave-one-cutter-out evaluation.
+- E000-B: raw/statistical features, train-only standardization and PCA do not transfer uniformly; held-out C6 collapses under PCA.
+- E000-C: denoising autoencoder modestly improves the hardest domain but remains unstable.
+- E000-D: VICReg-like invariance SSL raises mean LOCO R2 to about 0.585 and recovers the previously catastrophic C6 fold to a positive mean R2 about 0.416. All five C6 seeds are positive, but the pre-registered worst-fold seed-stability gate is missed narrowly (0.206 vs 0.20).
 
-### E000-B conclusion
+**H001 status: PARTIALLY SUPPORTED, with materially stronger evidence after E000-D.**
 
-Raw/statistical features, train-only standardization and PCA do **not** provide uniformly transferable representations across C1/C4/C6. PCA improves some folds and representation-geometry diagnostics but fails strongly on the held-out C6 fold. Therefore H001 remains OPEN; simple statistical transforms do not solve the shared-representation problem.
+### H002 — physical Process Token
 
-Detailed evidence is stored under `results/e000b/` and the decision record under `decisions/D000c_e000b.md`.
+E000-E directly audited ordered raw 50 kHz PHM2010 force signals across 21 representative cuts (C1/C4/C6). Both the spindle coordinate (~173.33 Hz) and tooth-passing coordinate (~520 Hz) pass the pre-registered observability gate. The spindle coordinate is reliable on all 21 cuts; the tooth-passing coordinate is within 5% frequency error on 20/21 cuts and is much more spectrally prominent in most cuts.
 
-### Next
+This supports a hierarchical physical coordinate:
 
-- preserve E000-B as the lower baseline;
-- require later methods to improve fold consistency, not just mean metrics;
-- continue H002c / Process Token validation when suitable high-frequency or cycle-aligned public data are available;
-- keep Process Token evaluation separate from feature-level H001 evidence.
+`spindle revolution -> three tooth-passing subcycles`.
+
+**H002c_1 status: SUPPORTED on this representative PHM2010 force-signal audit.**
+
+**H002c_2 / H002 overall: OPEN.** Coordinate recoverability does not prove that Process Token improves representation quality.
+
+### Current experiment
+
+E000-F is the fair raw-signal comparison of Fixed Patch vs Process Token with the same CNN encoder, VICReg objective, token count, seeds and LOCO split. During the first run, before inspecting metrics, a method audit found that subtracting each cut's initial Hilbert phase created a cut-relative phase origin. That v1 run was therefore pre-declared non-decisive for H002c_2. A corrected common-phase v2 was registered before looking at v1 results and is the decisive run.
+
+## Research guardrails
+
+- Synthetic sanity checks validate code behavior, not scientific hypotheses.
+- No random train/test split as the main industrial-sequence evidence.
+- No held-out-domain leakage into scaling, PCA, SSL or probes.
+- Mean metrics cannot hide a catastrophic held-out fold.
+- Sharedness ratios are secondary diagnostics when their denominator can approach zero.
+- Do not move pre-registered thresholds after inspecting results.
+- Do not claim H002 from coordinate recovery alone; Process Token must beat a fair Fixed Patch baseline.
 
 > Note: This repository is public. Proprietary industrial data, internal system details, credentials, and company-sensitive information should not be committed here.
