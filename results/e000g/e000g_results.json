@@ -1,0 +1,131 @@
+{
+  "dataset": "rabahba/phm-data-challenge-2010",
+  "cuts_used": 45,
+  "tokens_per_cut": 128,
+  "samples_per_token": 288,
+  "representations": [
+    "fixed_raw",
+    "hybrid_phase",
+    "hybrid_random_phase"
+  ],
+  "summary": [
+    {
+      "representation": "fixed_raw",
+      "wear_mae_mean": 25.982817120022247,
+      "wear_nmae_range_mean": 0.15896323415372682,
+      "wear_r2_mean": 0.34736400832902853,
+      "wear_r2_min_fold": 0.17249234650086215,
+      "wear_r2_max_fold": 0.5104153103992841,
+      "fold_r2_range": 0.33792296389842197,
+      "mean_fold_seed_std": 0.08912693940215193
+    },
+    {
+      "representation": "hybrid_phase",
+      "wear_mae_mean": 28.14877228630914,
+      "wear_nmae_range_mean": 0.171064137022067,
+      "wear_r2_mean": 0.2251628876023762,
+      "wear_r2_min_fold": 0.08694483150212066,
+      "wear_r2_max_fold": 0.42597668198014027,
+      "fold_r2_range": 0.3390318504780196,
+      "mean_fold_seed_std": 0.09428627266534367
+    },
+    {
+      "representation": "hybrid_random_phase",
+      "wear_mae_mean": 27.481748496161572,
+      "wear_nmae_range_mean": 0.1676338156049749,
+      "wear_r2_mean": 0.24098477510337826,
+      "wear_r2_min_fold": 0.017157985708815614,
+      "wear_r2_max_fold": 0.42280194099609636,
+      "fold_r2_range": 0.40564395528728076,
+      "mean_fold_seed_std": 0.12274447313631998
+    }
+  ],
+  "folds": [
+    {
+      "representation": "fixed_raw",
+      "heldout_cutter": "C1",
+      "wear_mae": 20.5178022257487,
+      "wear_nmae_range": 0.16345083938720048,
+      "wear_r2": 0.17249234650086215,
+      "wear_r2_seed_std": 0.12549086489820352
+    },
+    {
+      "representation": "fixed_raw",
+      "heldout_cutter": "C4",
+      "wear_mae": 25.3849915822347,
+      "wear_nmae_range": 0.14192511124261878,
+      "wear_r2": 0.5104153103992841,
+      "wear_r2_seed_std": 0.1077610449935442
+    },
+    {
+      "representation": "fixed_raw",
+      "heldout_cutter": "C6",
+      "wear_mae": 32.045657552083334,
+      "wear_nmae_range": 0.17151375183136117,
+      "wear_r2": 0.3591843680869394,
+      "wear_r2_seed_std": 0.03412890831470805
+    },
+    {
+      "representation": "hybrid_phase",
+      "heldout_cutter": "C1",
+      "wear_mae": 20.938276316324867,
+      "wear_nmae_range": 0.16680045950192196,
+      "wear_r2": 0.08694483150212066,
+      "wear_r2_seed_std": 0.08154239738443529
+    },
+    {
+      "representation": "hybrid_phase",
+      "heldout_cutter": "C4",
+      "wear_mae": 27.16881655375163,
+      "wear_nmae_range": 0.1518983096460832,
+      "wear_r2": 0.42597668198014027,
+      "wear_r2_seed_std": 0.13964142152786238
+    },
+    {
+      "representation": "hybrid_phase",
+      "heldout_cutter": "C6",
+      "wear_mae": 36.33922398885092,
+      "wear_nmae_range": 0.1944936419181958,
+      "wear_r2": 0.16256714932486765,
+      "wear_r2_seed_std": 0.061674999083733355
+    },
+    {
+      "representation": "hybrid_random_phase",
+      "heldout_cutter": "C1",
+      "wear_mae": 21.06682306925456,
+      "wear_nmae_range": 0.1678245006948178,
+      "wear_r2": 0.017157985708815614,
+      "wear_r2_seed_std": 0.13842050818744733
+    },
+    {
+      "representation": "hybrid_random_phase",
+      "heldout_cutter": "C4",
+      "wear_mae": 27.516767400105795,
+      "wear_nmae_range": 0.15384367025082488,
+      "wear_r2": 0.42280194099609636,
+      "wear_r2_seed_std": 0.18928682002846775
+    },
+    {
+      "representation": "hybrid_random_phase",
+      "heldout_cutter": "C6",
+      "wear_mae": 33.86165501912435,
+      "wear_nmae_range": 0.181233275869282,
+      "wear_r2": 0.28299439860522285,
+      "wear_r2_seed_std": 0.040526091193044844
+    }
+  ],
+  "decision": {
+    "h002f_status": "NOT_SUPPORTED",
+    "checks": {
+      "mean_gain_vs_fixed_ge_0p05": false,
+      "worst_fold_not_worse_than_fixed": false,
+      "mean_gain_vs_random_phase_ge_0p05": false,
+      "beats_fixed_in_at_least_2_folds": false,
+      "beats_fixed_in_at_least_4_of_5_seed_means": false
+    },
+    "hybrid_minus_fixed_mean_r2": -0.12220112072665232,
+    "hybrid_minus_random_mean_r2": -0.015821887501002052,
+    "folds_hybrid_beats_fixed": 0,
+    "seed_means_hybrid_beats_fixed": 0
+  }
+}
