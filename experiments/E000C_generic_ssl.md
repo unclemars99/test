@@ -48,4 +48,14 @@ A higher mean score with one catastrophic held-out domain is not considered a ro
 
 ## Status
 
-RUNNING via GitHub Actions. Results are written to `results/e000c/` and committed back to the repository.
+**COMPLETED.**
+
+Main aggregate result:
+
+- DAE12 mean R2: 0.231 vs PCA95: 0.194;
+- DAE12 worst-fold R2: -0.604 vs PCA95: -0.835;
+- DAE12 fold R2 range: 1.375 vs PCA95: 1.614.
+
+However, held-out C6 remains negative on average and DAE C6 R2 varies strongly across seeds (-1.553 to +0.222). Therefore the decision is **PARTIALLY SUPPORTED**, not a full validation of H001.
+
+See `results/e000c/` and `decisions/D000d_e000c.md`.
