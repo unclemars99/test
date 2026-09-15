@@ -1,0 +1,54 @@
+name: E000-B shared representation baseline
+
+on:
+  push:
+    paths:
+      - 'src/e000b_sharedness_baseline.py'
+      - '.github/workflows/e000b.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-e000b:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy pandas scikit-learn tabulate
+
+      - name: Download public PHM2010-derived feature table
+        run: |
+          mkdir -p data
+          curl -L --fail --retry 3 \
+            https://raw.githubusercontent.com/tayyabrehman96/XAI-PdMNet-Bench-Industry-5.0/main/data/phm2010/phm2010_feature_table.csv \
+            -o data/phm2010_feature_table.csv
+          wc -l data/phm2010_feature_table.csv
+
+      - name: Run E000-B
+        run: |
+          python src/e000b_sharedness_baseline.py \
+            --input data/phm2010_feature_table.csv \
+            --output results/e000b
+
+      - name: Commit reproducible results
+        run: |
+          git config user.name 'chatgpt-research-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add results/e000b
+          if git diff --cached --quiet; then
+            echo 'No result changes to commit.'
+          else
+            git commit -m 'Record E000-B shared representation baseline results'
+            git push
+          fi
