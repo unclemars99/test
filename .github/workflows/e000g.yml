@@ -1,0 +1,52 @@
+name: E000-G hybrid process token
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'src/e000f_fixed_vs_process_token.py'
+      - 'src/e000g_hybrid_process_token.py'
+      - 'experiments/E000G_hybrid_process_token.md'
+      - '.github/workflows/e000g.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-e000g:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy pandas scipy scikit-learn tabulate kagglehub
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Run E000-G
+        run: python src/e000g_hybrid_process_token.py
+
+      - name: Commit reproducible results
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin master || true
+          git add results/e000g || true
+          if git diff --cached --quiet; then
+            echo "No result changes"
+          else
+            git commit -m "Record E000-G hybrid process token results"
+            git push
+          fi
