@@ -30,9 +30,15 @@ VICReg-lite encoder:
 - worst-fold R2 and fold spread are primary robustness criteria;
 - sharedness, trajectory consistency, and cutter silhouette are secondary diagnostics.
 
-## Decision rule
+## Pre-registered decision rule
 
-The method is a stronger generic baseline only if it reduces held-out-domain collapse and stochastic instability relative to both PCA95 and E000-C DAE, rather than merely improving the mean score.
+To avoid post-hoc interpretation, the following gate is fixed before seeing E000-D results:
+
+- **PASS as a strong generic SSL baseline**: all three held-out-cutter mean R2 values are > 0 and the worst-fold seed-to-seed R2 standard deviation is <= 0.20.
+- **PARTIAL**: aggregate or worst-fold transfer improves over PCA/DAE, but at least one held-out fold remains R2 <= 0 or worst-fold seed std > 0.20.
+- **FAIL**: no meaningful worst-fold improvement over the E000-C DAE/PCA baselines, or stronger collapse/instability is introduced.
+
+Mean performance alone is not sufficient for PASS.
 
 ## Status
 
