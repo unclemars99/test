@@ -1,0 +1,3 @@
+coordinate,status,success_fraction,median_frequency_error_pct,fraction_error_below_5pct,median_cycle_length_cv,median_phase_positive_ratio,median_spectral_prominence
+spindle,PASS,1.0,0.3558819110576704,1.0,0.004347684825336314,0.9988679004117555,3757.7026149401527
+tooth,PASS,1.0,0.3558819110576704,0.9523809523809523,0.0,0.9996987319353278,80493.13442471359

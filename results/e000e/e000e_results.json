@@ -1,0 +1,33 @@
+{
+  "dataset": "rabahba/phm-data-challenge-2010",
+  "sampling_hz": 50000.0,
+  "spindle_hz_prior": 173.33333333333334,
+  "tooth_hz_prior": 520.0,
+  "attempted_cuts": 21,
+  "downloaded_cuts": 21,
+  "audited_coordinate_rows": 42,
+  "preferred_coordinate": "spindle",
+  "overall_status": "PASS",
+  "summary": [
+    {
+      "coordinate": "spindle",
+      "status": "PASS",
+      "success_fraction": 1.0,
+      "median_frequency_error_pct": 0.3558819110576704,
+      "fraction_error_below_5pct": 1.0,
+      "median_cycle_length_cv": 0.004347684825336314,
+      "median_phase_positive_ratio": 0.9988679004117555,
+      "median_spectral_prominence": 3757.7026149401527
+    },
+    {
+      "coordinate": "tooth",
+      "status": "PASS",
+      "success_fraction": 1.0,
+      "median_frequency_error_pct": 0.3558819110576704,
+      "fraction_error_below_5pct": 0.9523809523809523,
+      "median_cycle_length_cv": 0.0,
+      "median_phase_positive_ratio": 0.9996987319353278,
+      "median_spectral_prominence": 80493.13442471359
+    }
+  ]
+}
