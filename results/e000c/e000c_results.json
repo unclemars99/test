@@ -1,0 +1,112 @@
+{
+  "dataset_url": "https://raw.githubusercontent.com/tayyabrehman96/XAI-PdMNet-Bench-Industry-5.0/main/data/phm2010/phm2010_feature_table.csv",
+  "rows": 945,
+  "features": 48,
+  "protocol": "3-fold leave-one-cutter-out; train-only scaler/encoder/probe; DAE 5 seeds",
+  "summary": [
+    {
+      "representation": "dae12",
+      "wear_mae_mean": 22.077297717699366,
+      "wear_nmae_range_mean": 0.1318020493190146,
+      "wear_r2_mean": 0.2306084783350338,
+      "wear_r2_min_fold": -0.6041367518321505,
+      "wear_r2_max_fold": 0.7710136549278817,
+      "fold_r2_range": 1.3751504067600322,
+      "sharedness_ratio_mean": 8.304901575308174,
+      "trajectory_cosine_mean": 0.8304864129362416,
+      "domain_silhouette_cosine_mean": 0.10395608108717506
+    },
+    {
+      "representation": "pca95",
+      "wear_mae_mean": 22.732126582005595,
+      "wear_nmae_range_mean": 0.1335120623452192,
+      "wear_r2_mean": 0.19425111581416613,
+      "wear_r2_min_fold": -0.8349677290232342,
+      "wear_r2_max_fold": 0.7787053013207308,
+      "fold_r2_range": 1.613673030343965,
+      "sharedness_ratio_mean": 8.143187707327344,
+      "trajectory_cosine_mean": 0.8707704593336882,
+      "domain_silhouette_cosine_mean": 0.1185694043139115
+    }
+  ],
+  "folds": [
+    {
+      "representation": "dae12",
+      "heldout_cutter": "C1",
+      "wear_mae": 14.44126999382583,
+      "wear_nmae_range": 0.11504339871966433,
+      "wear_r2": 0.5249485319093703,
+      "wear_r2_seed_std": 0.19996284614264417,
+      "d_state_cosine": 0.6860926450824788,
+      "d_domain_cosine": 0.1360582650636209,
+      "sharedness_ratio": 5.133519475088211,
+      "trajectory_cosine_mean": 0.836272090050658,
+      "domain_silhouette_cosine": 0.11758263502661928
+    },
+    {
+      "representation": "dae12",
+      "heldout_cutter": "C4",
+      "wear_mae": 13.280741023643353,
+      "wear_nmae_range": 0.07425137964135042,
+      "wear_r2": 0.7710136549278817,
+      "wear_r2_seed_std": 0.024455403078422117,
+      "d_state_cosine": 0.6850597277202223,
+      "d_domain_cosine": 0.13506335635446612,
+      "sharedness_ratio": 5.256622043853216,
+      "trajectory_cosine_mean": 0.8273810608269325,
+      "domain_silhouette_cosine": 0.11790420316685288
+    },
+    {
+      "representation": "dae12",
+      "heldout_cutter": "C6",
+      "wear_mae": 38.50988213562892,
+      "wear_nmae_range": 0.20611136959602905,
+      "wear_r2": -0.6041367518321505,
+      "wear_r2_seed_std": 0.6501680995629999,
+      "d_state_cosine": 0.6888466791472846,
+      "d_domain_cosine": 0.04924444708527078,
+      "sharedness_ratio": 14.524563206983094,
+      "trajectory_cosine_mean": 0.8278060879311344,
+      "domain_silhouette_cosine": 0.07638140506805303
+    },
+    {
+      "representation": "pca95",
+      "heldout_cutter": "C1",
+      "wear_mae": 12.399603421696167,
+      "wear_nmae_range": 0.0987788830911536,
+      "wear_r2": 0.6390157751450019,
+      "wear_r2_seed_std": NaN,
+      "d_state_cosine": 1.6969846260628756,
+      "d_domain_cosine": 0.2733263284342959,
+      "sharedness_ratio": 6.208639452253134,
+      "trajectory_cosine_mean": 0.8432789211469652,
+      "domain_silhouette_cosine": 0.126496848396869
+    },
+    {
+      "representation": "pca95",
+      "heldout_cutter": "C4",
+      "wear_mae": 13.083658175031708,
+      "wear_nmae_range": 0.07314950788682933,
+      "wear_r2": 0.7787053013207308,
+      "wear_r2_seed_std": NaN,
+      "d_state_cosine": 1.70934056038951,
+      "d_domain_cosine": 0.2633742087676638,
+      "sharedness_ratio": 6.490159261915121,
+      "trajectory_cosine_mean": 0.8586170396951349,
+      "domain_silhouette_cosine": 0.11067326857220434
+    },
+    {
+      "representation": "pca95",
+      "heldout_cutter": "C6",
+      "wear_mae": 42.71311814928892,
+      "wear_nmae_range": 0.22860779605767464,
+      "wear_r2": -0.8349677290232342,
+      "wear_r2_seed_std": NaN,
+      "d_state_cosine": 1.7119473410553745,
+      "d_domain_cosine": 0.14593655464628785,
+      "sharedness_ratio": 11.730764407813776,
+      "trajectory_cosine_mean": 0.9104154171589647,
+      "domain_silhouette_cosine": 0.1185380959726611
+    }
+  ]
+}
