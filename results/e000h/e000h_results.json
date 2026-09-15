@@ -1,0 +1,95 @@
+{
+  "dataset": "rabahba/phm-data-challenge-2010",
+  "cuts_used": 45,
+  "revolutions_per_cut": 128,
+  "tooth_sectors_per_revolution": 3,
+  "samples_per_tooth_sector": 96,
+  "ssl": "revolution-level VICReg with identical hierarchical encoder; 5 seeds; strict LOCO",
+  "summary": [
+    {
+      "representation": "ordered_composition",
+      "wear_mae_mean": 29.242024832831486,
+      "wear_nmae_range_mean": 0.17587936641592583,
+      "wear_r2_mean": 0.08300309902785867,
+      "wear_r2_min_fold": -0.13042976769439224,
+      "wear_r2_max_fold": 0.2841071929226014,
+      "fold_r2_range": 0.41453696061699363,
+      "mean_fold_seed_std": 0.5568834871373627
+    },
+    {
+      "representation": "shuffled_composition",
+      "wear_mae_mean": 29.383880810207796,
+      "wear_nmae_range_mean": 0.1769713615889922,
+      "wear_r2_mean": 0.10457459665462937,
+      "wear_r2_min_fold": -0.06290646252968819,
+      "wear_r2_max_fold": 0.29224547276222523,
+      "fold_r2_range": 0.3551519352919134,
+      "mean_fold_seed_std": 0.4333625061385942
+    }
+  ],
+  "folds": [
+    {
+      "representation": "ordered_composition",
+      "heldout_cutter": "C1",
+      "wear_mae": 19.053305206298827,
+      "wear_nmae_range": 0.15178422595193036,
+      "wear_r2": -0.13042976769439224,
+      "wear_r2_seed_std": 1.1698530965133038
+    },
+    {
+      "representation": "ordered_composition",
+      "heldout_cutter": "C4",
+      "wear_mae": 34.78982210795085,
+      "wear_nmae_range": 0.1945066381758153,
+      "wear_r2": 0.09533187185536685,
+      "wear_r2_seed_std": 0.26202654315409313
+    },
+    {
+      "representation": "ordered_composition",
+      "heldout_cutter": "C6",
+      "wear_mae": 33.88294718424479,
+      "wear_nmae_range": 0.18134723512003179,
+      "wear_r2": 0.2841071929226014,
+      "wear_r2_seed_std": 0.23877082174469105
+    },
+    {
+      "representation": "shuffled_composition",
+      "heldout_cutter": "C1",
+      "wear_mae": 19.485891571044924,
+      "wear_nmae_range": 0.15523033600052388,
+      "wear_r2": -0.06290646252968819,
+      "wear_r2_seed_std": 0.7272176706630481
+    },
+    {
+      "representation": "shuffled_composition",
+      "heldout_cutter": "C4",
+      "wear_mae": 34.234566370646164,
+      "wear_nmae_range": 0.19140225533488417,
+      "wear_r2": 0.08438477973135106,
+      "wear_r2_seed_std": 0.29907956040280625
+    },
+    {
+      "representation": "shuffled_composition",
+      "heldout_cutter": "C6",
+      "wear_mae": 34.43118448893229,
+      "wear_nmae_range": 0.1842814934315687,
+      "wear_r2": 0.29224547276222523,
+      "wear_r2_seed_std": 0.2737902873499281
+    }
+  ],
+  "decision": {
+    "h002e_status": "NOT_SUPPORTED",
+    "checks": {
+      "mean_gain_over_shuffled_ge_0p05": false,
+      "worst_fold_not_worse_than_shuffled": false,
+      "wins_at_least_2_of_3_folds": false,
+      "wins_at_least_4_of_5_seed_means": false,
+      "seed_std_not_more_than_0p05_worse": false
+    },
+    "ordered_minus_shuffled_mean_r2": -0.0215714976267707,
+    "folds_ordered_wins": 1,
+    "seed_means_ordered_wins": 2,
+    "ordered_mean_fold_seed_std": 0.5568834871373627,
+    "shuffled_mean_fold_seed_std": 0.4333625061385942
+  }
+}
