@@ -25,8 +25,13 @@ where `D_state` measures separation between process states and `D_domain` measur
 - frozen linear / simple probes;
 - domain leakage probe;
 - trajectory consistency;
-- no test-domain leakage during scaling/PCA/pretraining.
+- no test-domain leakage during scaling/PCA/pretraining;
+- worst-domain and fold-consistency checks, not mean performance alone.
 
 ## Current status
 
-OPEN. Public PHM2010-derived data confirm a meaningful cutter-domain shift, but H001 itself is not yet supported until reproducible representation experiments are completed.
+**PARTIALLY SUPPORTED on the current PHM2010-derived feature-level benchmark.**
+
+E000-C shows that a generic denoising autoencoder modestly improves average and worst-fold transfer over PCA, but C6 still fails on average and the result is highly seed-sensitive. Therefore H001 remains open as a general industrial claim and requires stronger, more stable evidence on raw process signals and additional domains.
+
+See `decisions/D000d_e000c.md` and `results/e000c/`.
