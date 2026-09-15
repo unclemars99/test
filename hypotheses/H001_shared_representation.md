@@ -30,8 +30,14 @@ where `D_state` measures separation between process states and `D_domain` measur
 
 ## Current status
 
-**PARTIALLY SUPPORTED on the current PHM2010-derived feature-level benchmark.**
+**PARTIALLY SUPPORTED, with substantially stronger evidence after E000-D.**
 
-E000-C shows that a generic denoising autoencoder modestly improves average and worst-fold transfer over PCA, but C6 still fails on average and the result is highly seed-sensitive. Therefore H001 remains open as a general industrial claim and requires stronger, more stable evidence on raw process signals and additional domains.
+E000-C showed that reconstruction-oriented generic SSL modestly improved the average and worst-domain result over PCA but remained unstable and failed on C6 on average.
 
-See `decisions/D000d_e000c.md` and `results/e000c/`.
+E000-D then tested a VICReg-like invariance objective. Its frozen-probe mean R2 reached 0.585, every held-out-cutter fold had positive mean R2, and all five C6 seeds were positive. The previous catastrophic C6 domain shift was therefore substantially reduced.
+
+The pre-registered PASS gate is still not met because C6 seed-to-seed R2 std is 0.206, narrowly above the fixed 0.20 threshold. We do not move this threshold after seeing the result.
+
+H001 is therefore not yet promoted to fully SUPPORTED as a general industrial claim. Stronger evidence is still required on raw process signals, additional domains, and ideally physical-process representations.
+
+See `decisions/D000d_e000c.md`, `decisions/D000e_e000d.md`, `results/e000c/`, and `results/e000d/`.
