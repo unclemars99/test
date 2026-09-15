@@ -32,7 +32,7 @@ VICReg-lite encoder:
 
 ## Pre-registered decision rule
 
-To avoid post-hoc interpretation, the following gate is fixed before seeing E000-D results:
+To avoid post-hoc interpretation, the following gate was fixed before seeing E000-D results:
 
 - **PASS as a strong generic SSL baseline**: all three held-out-cutter mean R2 values are > 0 and the worst-fold seed-to-seed R2 standard deviation is <= 0.20.
 - **PARTIAL**: aggregate or worst-fold transfer improves over PCA/DAE, but at least one held-out fold remains R2 <= 0 or worst-fold seed std > 0.20.
@@ -40,6 +40,25 @@ To avoid post-hoc interpretation, the following gate is fixed before seeing E000
 
 Mean performance alone is not sufficient for PASS.
 
+## Result
+
+COMPLETED.
+
+VICReg12:
+
+- mean R2 = 0.585;
+- worst-fold mean R2 = 0.416;
+- fold R2 range = 0.317;
+- C1 mean R2 = 0.606;
+- C4 mean R2 = 0.732;
+- C6 mean R2 = 0.416;
+- C6 R2 across 5 seeds = 0.599, 0.255, 0.139, 0.518, 0.569;
+- C6 seed std = 0.206.
+
+All three held-out folds are positive, and C6 changes from catastrophic negative transfer under PCA/DAE to positive transfer for every VICReg seed. However, 0.206 narrowly exceeds the pre-registered 0.20 stability threshold.
+
 ## Status
 
-RUNNING via GitHub Actions. Results will be committed to `results/e000d/`.
+**PARTIAL by the pre-registered gate.**
+
+See `results/e000d/` and `decisions/D000e_e000d.md`.
