@@ -46,3 +46,5 @@ jobs:
             git commit -m "Record E000-E raw process-coordinate audit"
             git push
           fi
+
+# v1 trigger after protocol and audit code were committed
