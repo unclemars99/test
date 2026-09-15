@@ -1,0 +1,48 @@
+name: E000-E raw process-coordinate audit
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'src/e000e_phm_raw_phase_audit.py'
+      - '.github/workflows/e000e.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-e000e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy pandas scipy tabulate kagglehub
+
+      - name: Run E000-E
+        run: python src/e000e_phm_raw_phase_audit.py
+
+      - name: Commit reproducible results
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add results/e000e || true
+          if git diff --cached --quiet; then
+            echo "No result changes"
+          else
+            git commit -m "Record E000-E raw process-coordinate audit"
+            git push
+          fi
