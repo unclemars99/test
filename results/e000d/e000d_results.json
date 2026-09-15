@@ -1,0 +1,100 @@
+{
+  "dataset_url": "https://raw.githubusercontent.com/tayyabrehman96/XAI-PdMNet-Bench-Industry-5.0/main/data/phm2010/phm2010_feature_table.csv",
+  "rows": 945,
+  "features": 48,
+  "protocol": "3-fold LOCO; VICReg-lite 5 seeds; train-only scaler/SSL/probe",
+  "summary": [
+    {
+      "representation": "pca95",
+      "wear_mae_mean": 22.732126582005595,
+      "wear_nmae_range_mean": 0.1335120623452192,
+      "wear_r2_mean": 0.19425111581416585,
+      "wear_r2_min_fold": -0.8349677290232347,
+      "wear_r2_max_fold": 0.7787053013207309,
+      "fold_r2_range": 1.6136730303439655,
+      "sharedness_ratio_mean": 8.14318770732734,
+      "trajectory_cosine_mean": 0.8707704593336882,
+      "domain_silhouette_cosine_mean": 0.11856940431391148
+    },
+    {
+      "representation": "vicreg12",
+      "wear_mae_mean": 16.90716567024352,
+      "wear_nmae_range_mean": 0.10286415041260595,
+      "wear_r2_mean": 0.5848492088655716,
+      "wear_r2_min_fold": 0.4159377459811619,
+      "wear_r2_max_fold": 0.7324520774550537,
+      "fold_r2_range": 0.3165143314738918,
+      "sharedness_ratio_mean": 68.4491771023065,
+      "trajectory_cosine_mean": 0.6282221638494069,
+      "domain_silhouette_cosine_mean": 0.06690699929992357
+    }
+  ],
+  "folds": [
+    {
+      "representation": "pca95",
+      "heldout_cutter": "C1",
+      "wear_mae": 12.39960342169617,
+      "wear_nmae_range": 0.09877888309115362,
+      "wear_r2": 0.6390157751450014,
+      "wear_r2_seed_std": NaN,
+      "sharedness_ratio": 6.208639452253129,
+      "trajectory_cosine_mean": 0.8432789211469651,
+      "domain_silhouette_cosine": 0.12649684839686895
+    },
+    {
+      "representation": "pca95",
+      "heldout_cutter": "C4",
+      "wear_mae": 13.083658175031704,
+      "wear_nmae_range": 0.07314950788682932,
+      "wear_r2": 0.7787053013207309,
+      "wear_r2_seed_std": NaN,
+      "sharedness_ratio": 6.490159261915126,
+      "trajectory_cosine_mean": 0.8586170396951353,
+      "domain_silhouette_cosine": 0.11067326857220432
+    },
+    {
+      "representation": "pca95",
+      "heldout_cutter": "C6",
+      "wear_mae": 42.71311814928892,
+      "wear_nmae_range": 0.22860779605767464,
+      "wear_r2": -0.8349677290232347,
+      "wear_r2_seed_std": NaN,
+      "sharedness_ratio": 11.730764407813764,
+      "trajectory_cosine_mean": 0.9104154171589643,
+      "domain_silhouette_cosine": 0.11853809597266117
+    },
+    {
+      "representation": "vicreg12",
+      "heldout_cutter": "C1",
+      "wear_mae": 12.906356222970146,
+      "wear_nmae_range": 0.10281582475862425,
+      "wear_r2": 0.6061578031604989,
+      "wear_r2_seed_std": 0.07331251892407425,
+      "sharedness_ratio": 2.6304206326210604,
+      "trajectory_cosine_mean": 0.5499410589536031,
+      "domain_silhouette_cosine": 0.10779692381620407
+    },
+    {
+      "representation": "vicreg12",
+      "heldout_cutter": "C4",
+      "wear_mae": 14.172976822626023,
+      "wear_nmae_range": 0.07923978645704868,
+      "wear_r2": 0.7324520774550537,
+      "wear_r2_seed_std": 0.0313609753269491,
+      "sharedness_ratio": 2.591685484925672,
+      "trajectory_cosine_mean": 0.5385941356420517,
+      "domain_silhouette_cosine": 0.10194030851125717
+    },
+    {
+      "representation": "vicreg12",
+      "heldout_cutter": "C6",
+      "wear_mae": 23.642163965134394,
+      "wear_nmae_range": 0.12653684002214496,
+      "wear_r2": 0.4159377459811619,
+      "wear_r2_seed_std": 0.20615974417706645,
+      "sharedness_ratio": 200.1254251893728,
+      "trajectory_cosine_mean": 0.7961312969525655,
+      "domain_silhouette_cosine": -0.009016234427690506
+    }
+  ]
+}
