@@ -13,7 +13,7 @@ Process-aware representation should preserve useful raw state information while 
 - H002c_2: **hard phase-normalized tokenization** on that recovered coordinate outperforms an equal-budget fixed-patch baseline.
 - H002d: the best process coordinate may depend on sensing modality.
 - H002e: ordered composition of physical process units adds value beyond segmentation alone.
-- H002f: a **hybrid Process Token** that retains the raw local waveform and adds explicit physical-coordinate information outperforms either raw Fixed Patch alone or hard phase-normalized tokens alone.
+- H002f: a **hybrid Process Token** that retains the raw local waveform and appends explicit physical phase channels outperforms raw Fixed Patch alone.
 
 ## Fair-comparison rule
 
@@ -23,7 +23,7 @@ All comparisons must use the same data split, comparable model capacity, the sam
 
 ### E000-E — coordinate observability
 
-21 representative raw 50 kHz PHM2010 cuts across C1/C4/C6 were audited. Both spindle (~173.33 Hz) and tooth-passing (~520 Hz) coordinates pass the pre-registered real-data observability gate. The spindle coordinate is reliable on all 21 cuts; the tooth-passing coordinate is within 5% frequency error on 20/21 cuts and is much more spectrally prominent in most cuts.
+21 representative raw 50 kHz PHM2010 cuts across C1/C4/C6 were audited. Both spindle (~173.33 Hz) and tooth-passing (~520 Hz) coordinates pass the pre-registered real-data observability gate. The spindle coordinate is reliable on all 21 cuts; the tooth-passing coordinate is within 5% frequency error on 20/21 cuts.
 
 This supports a hierarchical physical coordinate for force observations:
 
@@ -31,21 +31,41 @@ This supports a hierarchical physical coordinate for force observations:
 
 ### E000-F v2 — hard alignment test
 
-45 raw cuts were evaluated with strict leave-one-cutter-out, identical position-sensitive CNN token encoders, identical token-level VICReg objectives, identical token counts and five seeds.
+Mean LOCO R2:
+
+- Fixed Patch: **0.400**
+- hard phase-normalized Process Token: **0.177**
+- Random-Phase cycle token: **0.084**
+
+Hard alignment does not beat Fixed Patch. Physical phase is observable, but replacing raw sampling-time structure with phase-normalized cycles loses useful transfer information.
+
+### E000-G — hybrid phase-channel test
+
+The raw waveform and patch boundaries were held identical. Only explicit physical phase side-information changed.
 
 Mean LOCO R2:
 
-- Fixed Patch: **0.400**;
-- hard phase-normalized Process Token: **0.177**;
-- Random-Phase cycle token: **0.084**.
+- Fixed Raw: **0.347**
+- Hybrid Phase `[raw + sin(phi) + cos(phi)]`: **0.225**
+- Hybrid Random Phase: **0.241**
 
-Hard Process Token therefore does **not** beat Fixed Patch. However, common-phase alignment improves over random phase by about +0.093 mean R2, suggesting that physical phase contains useful information even though hard normalization loses other useful state information.
+Hybrid Phase beats Fixed Raw in **0/3** held-out cutters and **0/5** seed-level mean comparisons. The pre-registered H002f gate returns **NOT_SUPPORTED**.
 
 ## Current status
 
-- **H002c_1: SUPPORTED on representative PHM2010 force signals.**
-- **H002c_2: NOT SUPPORTED on E000-F v2.**
-- **H002f: OPEN and now the next primary test.**
-- **H002 overall: OPEN.**
+- **H002c_1: SUPPORTED** — physical coordinate is observable on representative PHM2010 force signals.
+- **H002c_2: NOT SUPPORTED** — hard phase-normalized local tokenization fails.
+- **H002f: NOT SUPPORTED** — naively appending phase channels to raw local patches also fails.
+- **H002 overall: OPEN, but local phase-based tokenization is materially weakened.**
 
-The current evidence argues against defining Process Token as a replacement `raw waveform -> phase-normalized waveform only`. The next test should retain the raw sampling-coordinate waveform and add physical phase explicitly, e.g. `raw Fx/Fy/Fz + sin(phi) + cos(phi)`, under a parameter-matched encoder.
+## Current interpretation
+
+The evidence now argues against both of these local designs:
+
+`raw waveform -> phase-normalized waveform`
+
+and
+
+`raw waveform -> raw waveform + instantaneous phase channels`.
+
+If H002 is pursued further, the next scientifically distinct test should move the physical structure to a **higher level** rather than continue tuning local phase encoding. The most relevant remaining hypothesis is H002e: whether the ordered composition `tooth -> revolution -> event` adds transferable information beyond the same unordered/local raw token content.
