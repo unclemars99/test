@@ -1,0 +1,51 @@
+name: E000-F v2 common-phase process token
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'src/e000f_fixed_vs_process_token.py'
+      - 'src/e000f_phase_aligned_v2.py'
+      - '.github/workflows/e000f_v2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-e000f-v2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install numpy pandas scipy scikit-learn tabulate kagglehub
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Run corrected E000-F v2
+        run: python src/e000f_phase_aligned_v2.py
+
+      - name: Commit reproducible results
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin master || true
+          git add results/e000f_v2 || true
+          if git diff --cached --quiet; then
+            echo "No result changes"
+          else
+            git commit -m "Record corrected E000-F v2 common-phase results"
+            git push
+          fi
