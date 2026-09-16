@@ -37,31 +37,48 @@ Secondary:
 
 - domain leakage;
 - amount of context calibration needed for D3;
-- zero-shot vs few-shot adapter gap.
+- zero-shot vs few-shot adapter gap;
+- comparison against compact physics-feature baselines.
 
 ## Baselines
 
 - Raw / Fixed representation;
 - Process Token without device/context calibration;
-- Process Token + affine context calibration;
-- current context-conditioned factorization.
+- Process Token + lightweight context calibration;
+- compact stage-level physics features;
+- current context-conditioned factorization when applicable.
 
 ## Preflight protocol from E007
 
-Two-domain proxy tests show that target-domain onboarding can be staged:
+Two-domain proxy tests showed that target-domain onboarding can be staged:
 
 - ~50 unlabeled target samples: enough for a first-pass stable waveform/context calibration;
 - ~200–500 unlabeled target samples: substantially lower calibration-window sensitivity;
-- formal D3 validation should only expand to ~2000–3000 samples after the ~500-sample preflight passes.
+- formal D3 validation should only expand after the ~500-sample preflight passes.
 
-D3 calibration is allowed to estimate a lightweight context adapter only. The shared encoder remains frozen.
+D3 calibration may estimate a lightweight context adapter only. The shared encoder remains frozen.
+
+## True D3 evidence from E008
+
+A genuine third domain from the same material/process family has now been observed.
+
+Preflight findings:
+
+- the frozen `P1 -> Gap -> P2` decomposition succeeded throughout the D3 preflight sample;
+- zero-shot Process representation transferred better than the matched Fixed representation across the tested stress grid;
+- full target affine alignment was not consistently beneficial and often reduced independent process-state transfer;
+- compact physics features remained a very strong baseline and outperformed the current learned latent on several easy process-feedback targets.
+
+Interpretation:
+
+The stage structure and process-aware representation survive a true third-domain shift, which is meaningful positive evidence for H004. However, the result does not yet establish a universal shared latent because strong physical features remain competitive or superior and quality-level transfer has not yet been tested.
 
 ## Falsification / stop rule
 
-H004 is not supported if the representation only works after substantial D3-specific retraining, or if D3 process-state transfer collapses while simpler baselines remain competitive.
-
-A preflight may also reject a candidate D3 before formal testing if its physical-stage structure is not comparable to the current process family.
+H004 is not supported if the formal larger-D3 study requires substantial D3-specific retraining, if Process Token loses its advantage over Fixed under stable evaluation, or if the learned representation adds no value beyond strong physics baselines on less waveform-direct tasks.
 
 ## Status
 
-OPEN. E007 supports the feasibility of low-cost D3 onboarding, but no true third-domain evidence has yet been observed.
+**PRELIMINARY SUPPORT / OPEN.**
+
+True D3 preflight supports transfer of the physical stage representation and zero-shot Process Token beyond the original two-domain pair. Formal larger-D3 validation and stronger target tasks are still required before claiming `Z_shared`.
