@@ -48,37 +48,47 @@ Secondary:
 - compact stage-level physics features;
 - current context-conditioned factorization when applicable.
 
-## Preflight protocol from E007
+## Preflight evidence
 
-Two-domain proxy tests showed that target-domain onboarding can be staged:
+A genuine third domain from the same material/process family was first evaluated in a low-cost preflight.
 
-- ~50 unlabeled target samples: enough for a first-pass stable waveform/context calibration;
-- ~200–500 unlabeled target samples: substantially lower calibration-window sensitivity;
-- formal D3 validation should only expand after the ~500-sample preflight passes.
+The frozen `P1 -> Gap -> P2` decomposition survived the domain shift and zero-shot Process representation transferred better than matched Fixed representation. Full target affine alignment was not consistently beneficial, suggesting the shift contains real process/context change rather than only sensor/device offset.
 
-D3 calibration may estimate a lightweight context adapter only. The shared encoder remains frozen.
+## Formal D3 evidence — E009
 
-## True D3 evidence from E008
+The larger formal third-domain study used 2500 held-out D3 samples. Model/representation choices were selected only from source-domain D1↔D2 transfer.
 
-A genuine third domain from the same material/process family has now been observed.
+Mean Spearman across five process-feedback probes:
 
-Preflight findings:
+- Fixed waveform representation: 0.313
+- Process Token representation: **0.550**
+- compact physics features: 0.622
+- physics + Fixed latent: 0.605
+- physics + Process latent: **0.655**
 
-- the frozen `P1 -> Gap -> P2` decomposition succeeded throughout the D3 preflight sample;
-- zero-shot Process representation transferred better than the matched Fixed representation across the tested stress grid;
-- full target affine alignment was not consistently beneficial and often reduced independent process-state transfer;
-- compact physics features remained a very strong baseline and outperformed the current learned latent on several easy process-feedback targets.
+Process minus Fixed improvement is about +0.238 mean Spearman, with paired-bootstrap 95% interval approximately [0.223, 0.253].
+
+Adding Process latent to compact physics features improves mean transfer by about +0.032, with paired-bootstrap 95% interval approximately [0.023, 0.042]. Adding Fixed latent does not provide the same gain.
 
 Interpretation:
 
-The stage structure and process-aware representation survive a true third-domain shift, which is meaningful positive evidence for H004. However, the result does not yet establish a universal shared latent because strong physical features remain competitive or superior and quality-level transfer has not yet been tested.
+1. The physical stage coordinate survives a true external-domain shift.
+2. Process Token advantage is not confined to the original D1/D2 pair.
+3. Process-aware waveform structure carries some transferable information beyond a compact physics baseline.
+4. This still does not establish a universal `Z_shared`, because quality-level, lifecycle and cross-material tasks remain untested.
+
+One source pressure/context channel contains a mixed or inconsistent regime and is not treated as primary evidence.
 
 ## Falsification / stop rule
 
-H004 is not supported if the formal larger-D3 study requires substantial D3-specific retraining, if Process Token loses its advantage over Fixed under stable evaluation, or if the learned representation adds no value beyond strong physics baselines on less waveform-direct tasks.
+The same-material external-transfer claim would be weakened if future independent tasks require substantial target-specific retraining, if Process Token loses its advantage over Fixed under comparable evaluation, or if its residual value beyond physics features disappears on quality/lifecycle targets.
 
 ## Status
 
-**PRELIMINARY SUPPORT / OPEN.**
+**SUPPORTED within the current same-material third-domain scope.**
 
-True D3 preflight supports transfer of the physical stage representation and zero-shot Process Token beyond the original two-domain pair. Formal larger-D3 validation and stronger target tasks are still required before claiming `Z_shared`.
+This status supports external transfer of the physical process representation. It does **not** yet prove the broader universal shared-state proposition `Z_shared`.
+
+## Next
+
+Stop optimizing easy process-feedback proxies on the same three domains. The next decisive test should target information not almost directly encoded by the power waveform: quality / teardown / pull-test, lifecycle/tool-state change, or another genuinely new task. Cross-material validation follows with material/context explicitly separated.
