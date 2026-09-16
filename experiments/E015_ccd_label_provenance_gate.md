@@ -1,28 +1,37 @@
 # E015 — CCD Label Provenance Gate
 
 ## Status
-The first automatic label-source scan did not find explicit position-defect / weld-mark-area defect text in the initially queried database.
+The initial automatic label-source scan did not find explicit position-defect / weld-mark-area defect text in the first queried process database.
 
-A second anchor-based provenance scan then matched all independently reviewed CCD anchors in multiple process-side tables. A generic CCD total-result field was present and marked all anchors as NG, confirming that a broad CCD outcome is propagated into process records.
+A second anchor-based provenance scan matched all independently reviewed CCD anchors in process-side records and confirmed that a generic CCD total-result is propagated into process data. This established broad CCD-NG provenance, but not detailed subtype provenance.
 
-However, the process-side records did **not** expose a reliable subtype field that distinguishes position-related defects from weld-mark-area defects.
+A final cross-schema scan then searched all accessible non-system schemas using independently reviewed anchors. Multiple quality / inspection / process records were found, including broad visual-inspection results and downstream defect records. However, no reliable, general subtype field was found that consistently separates independently reviewed position-related defects from weld-mark-area defects.
+
+One downstream record contained a position-related tab-defect description for a single position anchor. That record is useful corroborating evidence for that individual event, but it is not a general CCD subtype source and must not be generalized to the other anchors.
 
 ## Interpretation
-This resolves one part of provenance but not the full E015 requirement:
+The provenance question is now sufficiently resolved:
 
 - broad CCD NG provenance: supported;
-- detailed defect subtype provenance: unresolved;
-- therefore the broad CCD flag may support a generic quality task, but it cannot yet support the subtype-specific position-defect gate.
+- detailed position-vs-area subtype provenance from accessible databases: not supported;
+- independently reviewed position/area subtype labels therefore remain external/manual truth.
 
-This is still a provenance limitation, not a negative result for the representation hypothesis.
+This is a data-provenance boundary, not a negative result for the process-representation hypothesis.
+
+## Decision
+Stop database-schema hunting for CCD subtype labels.
+
+Future subtype-specific E015 experiments must use independently reviewed visual labels as external ground truth. Generic CCD NG may support a broad quality task, but it must not be silently relabeled as POSITION_NG or AREA_NG.
 
 ## Next step
-Search other schemas / accessible sources for detailed CCD defect type, image/picture links, coded subtype fields, or inspection metadata using the already verified anchors. If no additional source is found, treat position/area subtype labels as external/manual truth and stop database-schema hunting.
+Accumulate additional independently reviewed position-related defects and matched area-related controls, then test the pre-registered incremental question under event/device-aware validation:
 
-Do not change the representation model while subtype provenance is unresolved.
+`Physics + Process > Physics ?`
+
+If subtype-specific incremental value does not reproduce with a larger independently reviewed cohort, close the position-defect signal as exploratory.
 
 ## Scientific rule
-Only independently verified CCD labels may enter the subtype-specific E015 quality test. A generic CCD NG flag must not be silently relabeled as POSITION_NG or AREA_NG. Missing labels, unavailable inspection, or unmatched records remain unknown and must not be treated as normal controls.
+Missing inspection, generic CCD NG, downstream defect categories, or unmatched records remain distinct provenance classes. They must not be merged merely to increase sample size.
 
 ## Privacy
 This public record intentionally excludes proprietary identifiers, table/field names, database details, internal thresholds, raw industrial data, and company-specific examples.
