@@ -10,7 +10,7 @@ A process representation that captures reusable shared process state should tran
 
 Formally:
 
-`D1 + D2 -> shared encoder -> frozen -> D3 probe / few-shot context calibration`
+`D1 + D2 -> shared encoder -> frozen -> D3 probe / lightweight unlabeled context calibration`
 
 The key question is not whether D3 can be fit after full retraining. The key question is whether the shared process coordinates learned from D1/D2 remain useful on D3.
 
@@ -46,10 +46,22 @@ Secondary:
 - Process Token + affine context calibration;
 - current context-conditioned factorization.
 
+## Preflight protocol from E007
+
+Two-domain proxy tests show that target-domain onboarding can be staged:
+
+- ~50 unlabeled target samples: enough for a first-pass stable waveform/context calibration;
+- ~200–500 unlabeled target samples: substantially lower calibration-window sensitivity;
+- formal D3 validation should only expand to ~2000–3000 samples after the ~500-sample preflight passes.
+
+D3 calibration is allowed to estimate a lightweight context adapter only. The shared encoder remains frozen.
+
 ## Falsification / stop rule
 
 H004 is not supported if the representation only works after substantial D3-specific retraining, or if D3 process-state transfer collapses while simpler baselines remain competitive.
 
+A preflight may also reject a candidate D3 before formal testing if its physical-stage structure is not comparable to the current process family.
+
 ## Status
 
-OPEN.
+OPEN. E007 supports the feasibility of low-cost D3 onboarding, but no true third-domain evidence has yet been observed.
